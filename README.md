@@ -20,7 +20,7 @@ Download all the necessary sources and documentation from Maven.
 Create a new PostgreSQL database and implement a connection to the service. All connection settings you can find in ***resources/application.properties***.
 To create the necessary tables in the database execute the SQL queries from file ***resaurces/db.sql***.
 
-Now application ready for running.
+Now the application is ready to running.
 
 ## Running the application
 First you need to run REST API service: method main() from class ***ru.sukhobskaya.springcourse.RestApp.RestAppApplication***.
