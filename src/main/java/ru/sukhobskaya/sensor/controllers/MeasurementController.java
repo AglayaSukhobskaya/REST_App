@@ -28,10 +28,10 @@ public class MeasurementController implements SensorExceptionHandler {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<HttpStatus> create(@RequestParam @Min(value = -100) @Max(value = 100) Double value,
+    public ResponseEntity<HttpStatus> create(@RequestParam @Min(value = -100) @Max(value = 100) Double temperature,
                                              @RequestParam Boolean isRainy,
                                              @RequestParam @Size(min = 3, max = 30) String sensorName) {
-        measurementService.create(value, isRainy, sensorName);
+        measurementService.create(temperature, isRainy, sensorName);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

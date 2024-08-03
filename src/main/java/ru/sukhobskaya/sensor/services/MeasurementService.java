@@ -32,11 +32,11 @@ public class MeasurementService {
     }
 
     @Transactional
-    public void create(Double value, Boolean isRainy, String sensorName) {
+    public void create(Double temperature, Boolean isRainy, String sensorName) {
         var sensor = sensorService.findByName(sensorName);
         sensorValidator.validateSensorExist(sensorName, sensor);
         var measurement = Measurement.builder()
-                .value(value)
+                .temperature(temperature)
                 .isRainy(isRainy)
                 .sensor(sensor)
                 .timeOfMeasurement(LocalDateTime.now())

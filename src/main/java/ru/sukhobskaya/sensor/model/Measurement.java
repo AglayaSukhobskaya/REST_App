@@ -19,8 +19,8 @@ public class Measurement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column(name = "value", nullable = false)
-    Double value;
+    @Column(name = "temperature", nullable = false)
+    Double temperature;
 
     @Column(name = "is_rainy", nullable = false)
     Boolean isRainy;

@@ -28,11 +28,11 @@ public class SensorService {
     }
 
     @Transactional
-    public void create(String sensorName) {
-        var sensor = findByName(sensorName);
-        sensorValidator.validateSensorDuplicate(sensorName, sensor);
+    public void create(String name) {
+        var sensor = findByName(name);
+        sensorValidator.validateSensorDuplicate(name, sensor);
         var newSensor = Sensor.builder()
-                .name(sensorName)
+                .name(name)
                 .build();
         sensorRepository.saveAndFlush(newSensor);
     }

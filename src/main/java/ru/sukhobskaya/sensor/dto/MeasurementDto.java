@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MeasurementDto {
-    Double value;
+    Double temperature;
     Boolean isRainy;
     String sensor;
 }

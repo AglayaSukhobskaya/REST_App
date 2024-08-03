@@ -25,8 +25,8 @@ public class SensorController implements SensorExceptionHandler {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<HttpStatus> create(@RequestParam @Size(min = 3, max = 30) String sensorName) {
-        sensorService.create(sensorName);
+    public ResponseEntity<HttpStatus> create(@RequestParam @Size(min = 3, max = 30) String name) {
+        sensorService.create(name);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }
