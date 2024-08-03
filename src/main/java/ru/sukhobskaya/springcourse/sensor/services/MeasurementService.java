@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.RestApp.services;
+package ru.sukhobskaya.springcourse.sensor.services;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -6,10 +6,10 @@ import lombok.experimental.FieldDefaults;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.sukhobskaya.springcourse.RestApp.dto.MeasurementDto;
-import ru.sukhobskaya.springcourse.RestApp.model.Measurement;
-import ru.sukhobskaya.springcourse.RestApp.repositories.MeasurementRepository;
-import ru.sukhobskaya.springcourse.RestApp.util.SensorValidator;
+import ru.sukhobskaya.springcourse.sensor.dto.MeasurementDto;
+import ru.sukhobskaya.springcourse.sensor.model.Measurement;
+import ru.sukhobskaya.springcourse.sensor.repositories.MeasurementRepository;
+import ru.sukhobskaya.springcourse.sensor.util.SensorValidator;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -39,14 +39,14 @@ public class MeasurementService {
                 .value(value)
                 .isRainy(isRainy)
                 .sensor(sensor)
-                .createdAt(LocalDateTime.now())
+                .timeOfMeasurement(LocalDateTime.now())
                 .build();
         measurementRepository.saveAndFlush(measurement);
     }
 
     public Integer countRainyDays() {
         return measurementRepository.findByIsRainyTrue().stream()
-                .map(Measurement::getCreatedAt)
+                .map(Measurement::getTimeOfMeasurement)
                 .map(LocalDateTime::toLocalDate)
                 .distinct()
                 .toList().size();

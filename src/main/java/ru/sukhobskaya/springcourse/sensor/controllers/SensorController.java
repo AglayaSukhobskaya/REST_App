@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.RestApp.controllers;
+package ru.sukhobskaya.springcourse.sensor.controllers;
 
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
@@ -7,8 +7,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.sukhobskaya.springcourse.RestApp.services.SensorService;
-import ru.sukhobskaya.springcourse.RestApp.util.SensorExceptionHandler;
+import ru.sukhobskaya.springcourse.sensor.services.SensorService;
+import ru.sukhobskaya.springcourse.sensor.util.SensorExceptionHandler;
 
 import java.util.List;
 

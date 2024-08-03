@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.RestApp.util;
+package ru.sukhobskaya.springcourse.sensor.util;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;

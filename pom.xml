@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ru.sukhobskaya.springcourse</groupId>
-	<artifactId>RestApp</artifactId>
+	<artifactId>sensor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>RestApp</name>
-	<description>REST Application</description>
+	<name>sensor</name>
+	<description>Sensor measurements API</description>
 	<url/>
 	<licenses>
 		<license/>

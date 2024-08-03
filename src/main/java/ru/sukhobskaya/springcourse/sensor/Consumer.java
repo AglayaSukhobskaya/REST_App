@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.RestApp;
+package ru.sukhobskaya.springcourse.sensor;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestTemplate;

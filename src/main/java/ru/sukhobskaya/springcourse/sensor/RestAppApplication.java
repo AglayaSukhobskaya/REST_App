@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.RestApp;
+package ru.sukhobskaya.springcourse.sensor;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;

@@ -1,7 +1,7 @@
-package ru.sukhobskaya.springcourse.RestApp.util;
+package ru.sukhobskaya.springcourse.sensor.util;
 
 import org.springframework.stereotype.Component;
-import ru.sukhobskaya.springcourse.RestApp.model.Sensor;
+import ru.sukhobskaya.springcourse.sensor.model.Sensor;
 
 import java.util.Objects;
 

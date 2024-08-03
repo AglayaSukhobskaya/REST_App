@@ -1,8 +1,8 @@
-package ru.sukhobskaya.springcourse.RestApp.repositories;
+package ru.sukhobskaya.springcourse.sensor.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import ru.sukhobskaya.springcourse.RestApp.model.Sensor;
+import ru.sukhobskaya.springcourse.sensor.model.Sensor;
 
 import java.util.List;
 import java.util.Optional;

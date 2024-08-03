@@ -23,9 +23,9 @@ To create the necessary tables in the database execute the SQL queries from file
 Now the application is ready to running.
 
 ## Running the application
-First you need to run REST API service: method main() from class ***ru.sukhobskaya.springcourse.RestApp.RestAppApplication***.
+First you need to run REST API service: method main() from class ***ru.sukhobskaya.springcourse.sensor.RestAppApplication***.
 
-After that run the Consumer: method main() from class ***ru.sukhobskaya.springcourse.RestApp.Consumer***.
+After that run the Consumer: method main() from class ***ru.sukhobskaya.springcourse.sensor.Consumer***.
 
 If everything is done correctly, you will see in the console a report on the registration of a new sensor, a report on adding 1000 random measurements to the database as well as the values of all measurements.
 

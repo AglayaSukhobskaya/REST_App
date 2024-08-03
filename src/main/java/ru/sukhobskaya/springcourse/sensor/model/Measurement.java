@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.RestApp.model;
+package ru.sukhobskaya.springcourse.sensor.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,6 +29,6 @@ public class Measurement {
     @JoinColumn(name = "sensor", referencedColumnName = "name", nullable = false)
     Sensor sensor;
 
-    @Column(name = "created_at")
-    LocalDateTime createdAt;
+    @Column(name = "time_of_measurement")
+    LocalDateTime timeOfMeasurement;
 }

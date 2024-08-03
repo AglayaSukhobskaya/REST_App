@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.RestApp.model;
+package ru.sukhobskaya.springcourse.sensor.model;
 
 import jakarta.persistence.*;
 import lombok.*;

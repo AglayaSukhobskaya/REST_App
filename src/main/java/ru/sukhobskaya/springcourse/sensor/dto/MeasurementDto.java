@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.RestApp.dto;
+package ru.sukhobskaya.springcourse.sensor.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;
