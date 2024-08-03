@@ -31,8 +31,9 @@ public class SensorService {
     public void create(String sensorName) {
         var sensor = findByName(sensorName);
         sensorValidator.validateSensorDuplicate(sensorName, sensor);
-        var newSensor = new Sensor();
-        newSensor.setName(sensorName);
+        var newSensor = Sensor.builder()
+                .name(sensorName)
+                .build();
         sensorRepository.saveAndFlush(newSensor);
     }
 

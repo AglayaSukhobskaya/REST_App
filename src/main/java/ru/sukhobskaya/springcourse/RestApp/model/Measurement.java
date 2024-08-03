@@ -1,14 +1,16 @@
 package ru.sukhobskaya.springcourse.RestApp.model;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Measurement")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Measurement {

@@ -35,11 +35,12 @@ public class MeasurementService {
     public void create(Double value, Boolean isRainy, String sensorName) {
         var sensor = sensorService.findByName(sensorName);
         sensorValidator.validateSensorExist(sensorName, sensor);
-        var measurement = new Measurement();
-        measurement.setValue(value);
-        measurement.setIsRainy(isRainy);
-        measurement.setSensor(sensor);
-        measurement.setCreatedAt(LocalDateTime.now());
+        var measurement = Measurement.builder()
+                .value(value)
+                .isRainy(isRainy)
+                .sensor(sensor)
+                .createdAt(LocalDateTime.now())
+                .build();
         measurementRepository.saveAndFlush(measurement);
     }
 

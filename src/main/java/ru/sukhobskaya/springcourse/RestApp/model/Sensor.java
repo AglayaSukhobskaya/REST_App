@@ -1,14 +1,16 @@
 package ru.sukhobskaya.springcourse.RestApp.model;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.io.Serializable;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Sensor")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Sensor implements Serializable {
