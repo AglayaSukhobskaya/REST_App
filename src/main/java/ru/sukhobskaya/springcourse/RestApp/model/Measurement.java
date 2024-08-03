@@ -1,44 +1,40 @@
 package ru.sukhobskaya.springcourse.RestApp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "Measurement")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Measurement {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    Integer id;
 
     @Column(name = "value")
     @NotNull(message = "Value should not be empty")
     @Min(value = -100, message = "Value should be greater than -100")
     @Max(value = 100, message = "Value should be less than 100")
-    private Double value;
+    Double value;
 
-    @Column(name = "raining")
+    @Column(name = "is_rainy")
     @NotNull(message = "Raining should not be empty")
-    private Boolean raining;
+    Boolean isRainy;
 
     @ManyToOne
     @NotNull(message = "Sensor should not be empty")
     @JoinColumn(name = "sensor", referencedColumnName = "name")
-    private Sensor sensor;
+    Sensor sensor;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    public Measurement() {}
-
-    public Measurement(double value, boolean raining) {
-        this.value = value;
-        this.raining = raining;
-    }
-
+    LocalDateTime createdAt;
 }

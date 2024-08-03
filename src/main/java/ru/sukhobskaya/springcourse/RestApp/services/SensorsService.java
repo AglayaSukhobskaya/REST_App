@@ -21,6 +21,6 @@ public class SensorsService {
 
     @Transactional
     public void save(Sensor sensor) {
-        sensorsRepository.save(sensor);
+        sensorsRepository.saveAndFlush(sensor);
     }
 }

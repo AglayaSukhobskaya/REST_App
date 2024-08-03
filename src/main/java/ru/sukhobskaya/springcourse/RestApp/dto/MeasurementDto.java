@@ -11,7 +11,7 @@ public class MeasurementDto {
     private Double value;
 
     @NotNull(message = "Raining should not be empty")
-    private Boolean raining;
+    private Boolean isRainy;
 
     @NotNull
     private SensorDto sensor;

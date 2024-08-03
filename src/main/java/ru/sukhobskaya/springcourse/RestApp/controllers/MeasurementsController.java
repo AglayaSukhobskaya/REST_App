@@ -19,7 +19,6 @@ import ru.sukhobskaya.springcourse.RestApp.util.MeasurementNotCreatedException;
 import ru.sukhobskaya.springcourse.RestApp.util.MeasurementNotFoundException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/measurements")
@@ -31,9 +30,8 @@ public class MeasurementsController {
     ModelMapper modelMapper;
 
     @GetMapping
-    public List<MeasurementDto> getMeasurements() {
-        return measurementsService.findAll().stream().map(this::convertToMeasurementDTO)
-                .collect(Collectors.toList());
+    public List<MeasurementDto> getAll() {
+        return measurementsService.findAll();
     }
 
     @PostMapping("/add")
@@ -43,7 +41,7 @@ public class MeasurementsController {
         if (sensor == null) {
             throw new MeasurementNotCreatedException("Sensor with this name does not exist!");
         }
-        Measurement measurement = convertToMeasurement(measurementDTO);
+        Measurement measurement = modelMapper.map(measurementDTO, Measurement.class);
         measurement.setSensor(sensor);
 
         if (bindingResult.hasErrors()) {
@@ -56,12 +54,12 @@ public class MeasurementsController {
             throw new MeasurementNotCreatedException(errorMsg.toString());
         }
 
-        measurementsService.save(measurement);
+        measurementsService.create(measurement);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/rainyDaysCount")
-    public int rainyDaysCount() {
+    public Integer rainyDaysCount() {
         return measurementsService.rainyDaysCount();
     }
 
@@ -81,13 +79,5 @@ public class MeasurementsController {
                 System.currentTimeMillis()
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    private Measurement convertToMeasurement(MeasurementDto measurementDTO) {
-        return modelMapper.map(measurementDTO, Measurement.class);
-    }
-
-    private MeasurementDto convertToMeasurementDTO(Measurement measurement) {
-        return modelMapper.map(measurement, MeasurementDto.class);
     }
 }
