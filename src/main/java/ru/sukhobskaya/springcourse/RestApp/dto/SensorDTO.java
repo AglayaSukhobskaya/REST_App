@@ -1,7 +1,6 @@
 package ru.sukhobskaya.springcourse.RestApp.dto;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class SensorDTO {
     @Size(min = 3, max = 30, message = "Name should be between 3 and 30 characters")

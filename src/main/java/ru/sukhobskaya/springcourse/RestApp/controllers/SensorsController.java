@@ -14,7 +14,7 @@ import ru.sukhobskaya.springcourse.RestApp.util.ErrorResponse;
 import ru.sukhobskaya.springcourse.RestApp.util.SensorNotCreatedException;
 import ru.sukhobskaya.springcourse.RestApp.util.SensorValidator;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController

@@ -1,8 +1,6 @@
 package ru.sukhobskaya.springcourse.RestApp.dto;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 public class MeasurementDTO {
     @NotNull(message = "Value should not be empty")
