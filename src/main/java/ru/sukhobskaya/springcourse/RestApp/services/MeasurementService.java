@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sukhobskaya.springcourse.RestApp.dto.MeasurementDto;
 import ru.sukhobskaya.springcourse.RestApp.model.Measurement;
-import ru.sukhobskaya.springcourse.RestApp.repositories.MeasurementsRepository;
+import ru.sukhobskaya.springcourse.RestApp.repositories.MeasurementRepository;
 import ru.sukhobskaya.springcourse.RestApp.util.SensorValidator;
 
 import java.time.LocalDateTime;
@@ -18,14 +18,14 @@ import java.util.List;
 @Transactional(readOnly = true)
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class MeasurementsService {
-    MeasurementsRepository measurementsRepository;
-    SensorsService sensorsService;
+public class MeasurementService {
+    MeasurementRepository measurementRepository;
+    SensorService sensorService;
     SensorValidator sensorValidator;
     ModelMapper modelMapper;
 
     public List<MeasurementDto> findAll() {
-        var measurements = measurementsRepository.findAll();
+        var measurements = measurementRepository.findAll();
         return measurements.stream()
                 .map(measurement -> modelMapper.map(measurement, MeasurementDto.class))
                 .toList();
@@ -33,18 +33,18 @@ public class MeasurementsService {
 
     @Transactional
     public void create(Double value, Boolean isRainy, String sensorName) {
-        var sensor = sensorsService.findByName(sensorName);
+        var sensor = sensorService.findByName(sensorName);
         sensorValidator.validateSensorExist(sensorName, sensor);
         var measurement = new Measurement();
         measurement.setValue(value);
         measurement.setIsRainy(isRainy);
         measurement.setSensor(sensor);
         measurement.setCreatedAt(LocalDateTime.now());
-        measurementsRepository.saveAndFlush(measurement);
+        measurementRepository.saveAndFlush(measurement);
     }
 
-    public Integer rainyDaysCount() {
-        return measurementsRepository.findByIsRainyTrue().stream()
+    public Integer countRainyDays() {
+        return measurementRepository.findByIsRainyTrue().stream()
                 .map(Measurement::getCreatedAt)
                 .map(LocalDateTime::toLocalDate)
                 .distinct()

@@ -6,19 +6,25 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sukhobskaya.springcourse.RestApp.model.Sensor;
-import ru.sukhobskaya.springcourse.RestApp.repositories.SensorsRepository;
+import ru.sukhobskaya.springcourse.RestApp.repositories.SensorRepository;
 import ru.sukhobskaya.springcourse.RestApp.util.SensorValidator;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class SensorsService {
-    SensorsRepository sensorsRepository;
+public class SensorService {
+    SensorRepository sensorRepository;
     SensorValidator sensorValidator;
 
+    public List<String> findAll() {
+        return sensorRepository.findAllSensorNames();
+    }
+
     public Sensor findByName(String name) {
-        return sensorsRepository.findByName(name).orElse(null);
+        return sensorRepository.findByName(name).orElse(null);
     }
 
     @Transactional
@@ -27,6 +33,8 @@ public class SensorsService {
         sensorValidator.validateSensorDuplicate(sensorName, sensor);
         var newSensor = new Sensor();
         newSensor.setName(sensorName);
-        sensorsRepository.saveAndFlush(newSensor);
+        sensorRepository.saveAndFlush(newSensor);
     }
+
+
 }

@@ -1,8 +1,6 @@
 package ru.sukhobskaya.springcourse.RestApp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -19,8 +17,11 @@ public class Sensor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column(name = "name")
-    @Size(min = 3, max = 30, message = "Name should be between 3 and 30 characters")
-    @NotEmpty(message = "Name should not be empty")
+    @Column(name = "name", nullable = false, length = 30, unique = true)
     String name;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -1,9 +1,6 @@
 package ru.sukhobskaya.springcourse.RestApp.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -20,19 +17,14 @@ public class Measurement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column(name = "value")
-    @NotNull(message = "Value should not be empty")
-    @Min(value = -100, message = "Value should be greater than -100")
-    @Max(value = 100, message = "Value should be less than 100")
+    @Column(name = "value", nullable = false)
     Double value;
 
-    @Column(name = "is_rainy")
-    @NotNull(message = "Raining should not be empty")
+    @Column(name = "is_rainy", nullable = false)
     Boolean isRainy;
 
     @ManyToOne
-    @NotNull(message = "Sensor should not be empty")
-    @JoinColumn(name = "sensor", referencedColumnName = "name")
+    @JoinColumn(name = "sensor", referencedColumnName = "name", nullable = false)
     Sensor sensor;
 
     @Column(name = "created_at")

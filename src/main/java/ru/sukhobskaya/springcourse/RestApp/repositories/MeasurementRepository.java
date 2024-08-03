@@ -5,6 +5,6 @@ import ru.sukhobskaya.springcourse.RestApp.model.Measurement;
 
 import java.util.List;
 
-public interface MeasurementsRepository extends JpaRepository<Measurement, Integer> {
+public interface MeasurementRepository extends JpaRepository<Measurement, Integer> {
     List<Measurement> findByIsRainyTrue();
 }
