@@ -1,5 +1,8 @@
 package ru.sukhobskaya.sensor.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -12,6 +15,7 @@ import ru.sukhobskaya.sensor.util.SensorExceptionHandler;
 
 import java.util.List;
 
+@Tag(name = "Sensor API")
 @RestController
 @RequestMapping("/sensors")
 @AllArgsConstructor
@@ -19,13 +23,16 @@ import java.util.List;
 public class SensorController implements SensorExceptionHandler {
     SensorService sensorService;
 
+    @Operation(summary = "Get all sensors")
     @GetMapping("/all")
     public List<String> getAll() {
         return sensorService.findAll();
     }
 
+    @Operation(summary = "Register new sensor")
     @PostMapping("/registration")
-    public ResponseEntity<HttpStatus> create(@RequestParam @Size(min = 3, max = 30) String name) {
+    public ResponseEntity<HttpStatus> create(@RequestParam @Size(min = 3, max = 30)
+                                             @Parameter(description = "Sensor name") String name) {
         sensorService.create(name);
         return ResponseEntity.ok(HttpStatus.OK);
     }
