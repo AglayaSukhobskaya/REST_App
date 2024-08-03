@@ -1,25 +1,22 @@
 package ru.sukhobskaya.springcourse.RestApp.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.sukhobskaya.springcourse.RestApp.models.Measurement;
+import ru.sukhobskaya.springcourse.RestApp.model.Measurement;
 import ru.sukhobskaya.springcourse.RestApp.repositories.MeasurementsRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MeasurementsService {
-    private final MeasurementsRepository measurementsRepository;
-
-    @Autowired
-    public MeasurementsService(MeasurementsRepository measurementsRepository) {
-        this.measurementsRepository = measurementsRepository;
-    }
+    MeasurementsRepository measurementsRepository;
 
     public List<Measurement> findAll() {
         return measurementsRepository.findAll();
@@ -32,12 +29,10 @@ public class MeasurementsService {
     }
 
     public int rainyDaysCount() {
-        List<LocalDate> dates = measurementsRepository.findByRainingTrue().stream()
+        return measurementsRepository.findByRainingTrue().stream()
                 .map(Measurement::getCreatedAt)
                 .map(LocalDateTime::toLocalDate)
-                .collect(Collectors.toList());
-
-        return dates.size();
+                .toList().size();
     }
 
     private void enrichMeasurement(Measurement measurement) {

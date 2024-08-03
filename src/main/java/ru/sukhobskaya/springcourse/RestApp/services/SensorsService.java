@@ -1,26 +1,22 @@
 package ru.sukhobskaya.springcourse.RestApp.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.sukhobskaya.springcourse.RestApp.models.Sensor;
+import ru.sukhobskaya.springcourse.RestApp.model.Sensor;
 import ru.sukhobskaya.springcourse.RestApp.repositories.SensorsRepository;
-
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SensorsService {
-    private final SensorsRepository sensorsRepository;
-
-    @Autowired
-    public SensorsService(SensorsRepository sensorsRepository) {
-        this.sensorsRepository = sensorsRepository;
-    }
+    SensorsRepository sensorsRepository;
 
     public Sensor findByName(String name) {
-        Optional<Sensor> foundSensor = sensorsRepository.findByName(name);
-        return foundSensor.orElse(null);
+        return sensorsRepository.findByName(name).orElse(null);
     }
 
     @Transactional

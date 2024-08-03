@@ -1,9 +1,14 @@
-package ru.sukhobskaya.springcourse.RestApp.models;
+package ru.sukhobskaya.springcourse.RestApp.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "Sensor")
 public class Sensor implements Serializable {
@@ -20,22 +25,6 @@ public class Sensor implements Serializable {
     public Sensor() {}
 
     public Sensor(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 }
