@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.sensor.util;
+package ru.sukhobskaya.sensor.util;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

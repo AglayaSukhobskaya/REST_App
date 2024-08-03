@@ -1,7 +1,7 @@
-package ru.sukhobskaya.springcourse.sensor.repositories;
+package ru.sukhobskaya.sensor.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.sukhobskaya.springcourse.sensor.model.Measurement;
+import ru.sukhobskaya.sensor.model.Measurement;
 
 import java.util.List;
 

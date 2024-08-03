@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.sensor.dto;
+package ru.sukhobskaya.sensor.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;

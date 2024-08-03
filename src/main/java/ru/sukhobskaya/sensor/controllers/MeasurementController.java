@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.sensor.controllers;
+package ru.sukhobskaya.sensor.controllers;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -9,9 +9,9 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.sukhobskaya.springcourse.sensor.dto.MeasurementDto;
-import ru.sukhobskaya.springcourse.sensor.services.MeasurementService;
-import ru.sukhobskaya.springcourse.sensor.util.SensorExceptionHandler;
+import ru.sukhobskaya.sensor.dto.MeasurementDto;
+import ru.sukhobskaya.sensor.services.MeasurementService;
+import ru.sukhobskaya.sensor.util.SensorExceptionHandler;
 
 import java.util.List;
 

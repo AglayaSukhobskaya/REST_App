@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.sensor.util;
+package ru.sukhobskaya.sensor.util;
 
 public class SensorException extends RuntimeException {
 

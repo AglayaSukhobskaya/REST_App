@@ -1,13 +1,13 @@
-package ru.sukhobskaya.springcourse.sensor.services;
+package ru.sukhobskaya.sensor.services;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.sukhobskaya.springcourse.sensor.model.Sensor;
-import ru.sukhobskaya.springcourse.sensor.repositories.SensorRepository;
-import ru.sukhobskaya.springcourse.sensor.util.SensorValidator;
+import ru.sukhobskaya.sensor.model.Sensor;
+import ru.sukhobskaya.sensor.repositories.SensorRepository;
+import ru.sukhobskaya.sensor.util.SensorValidator;
 
 import java.util.List;
 

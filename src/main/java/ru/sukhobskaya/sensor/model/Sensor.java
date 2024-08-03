@@ -1,4 +1,4 @@
-package ru.sukhobskaya.springcourse.sensor.model;
+package ru.sukhobskaya.sensor.model;
 
 import jakarta.persistence.*;
 import lombok.*;
