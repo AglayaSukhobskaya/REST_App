@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.sukhobskaya.springcourse.RestApp.dto.MeasurementDto;
 import ru.sukhobskaya.springcourse.RestApp.model.Measurement;
 import ru.sukhobskaya.springcourse.RestApp.repositories.MeasurementsRepository;
+import ru.sukhobskaya.springcourse.RestApp.util.SensorValidator;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,24 +20,34 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MeasurementsService {
     MeasurementsRepository measurementsRepository;
+    SensorsService sensorsService;
+    SensorValidator sensorValidator;
     ModelMapper modelMapper;
 
     public List<MeasurementDto> findAll() {
-        return measurementsRepository.findAll().stream()
+        var measurements = measurementsRepository.findAll();
+        return measurements.stream()
                 .map(measurement -> modelMapper.map(measurement, MeasurementDto.class))
                 .toList();
     }
 
     @Transactional
-    public void create(Measurement measurement) {
+    public void create(Double value, Boolean isRainy, String sensorName) {
+        var sensor = sensorsService.findByName(sensorName);
+        sensorValidator.validateSensorExist(sensorName, sensor);
+        var measurement = new Measurement();
+        measurement.setValue(value);
+        measurement.setIsRainy(isRainy);
+        measurement.setSensor(sensor);
         measurement.setCreatedAt(LocalDateTime.now());
-        measurementsRepository.save(measurement);
+        measurementsRepository.saveAndFlush(measurement);
     }
 
-    public int rainyDaysCount() {
+    public Integer rainyDaysCount() {
         return measurementsRepository.findByIsRainyTrue().stream()
                 .map(Measurement::getCreatedAt)
                 .map(LocalDateTime::toLocalDate)
+                .distinct()
                 .toList().size();
     }
 }

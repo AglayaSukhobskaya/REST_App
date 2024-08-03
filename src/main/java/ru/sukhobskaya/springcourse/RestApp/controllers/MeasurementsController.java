@@ -1,23 +1,21 @@
 package ru.sukhobskaya.springcourse.RestApp.controllers;
 
-import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ru.sukhobskaya.springcourse.RestApp.dto.MeasurementDto;
-import ru.sukhobskaya.springcourse.RestApp.model.Measurement;
 import ru.sukhobskaya.springcourse.RestApp.services.MeasurementsService;
-import ru.sukhobskaya.springcourse.RestApp.services.SensorsService;
 import ru.sukhobskaya.springcourse.RestApp.util.ErrorResponse;
-import ru.sukhobskaya.springcourse.RestApp.util.MeasurementNotCreatedException;
+import ru.sukhobskaya.springcourse.RestApp.util.SensorException;
 import ru.sukhobskaya.springcourse.RestApp.util.MeasurementNotFoundException;
 
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -26,35 +24,17 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MeasurementsController {
     MeasurementsService measurementsService;
-    SensorsService sensorsService;
-    ModelMapper modelMapper;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<MeasurementDto> getAll() {
         return measurementsService.findAll();
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<HttpStatus> create(@RequestBody @Valid MeasurementDto measurementDTO,
-                                             BindingResult bindingResult) {
-        var sensor = sensorsService.findByName(measurementDTO.getSensor().getName());
-        if (sensor == null) {
-            throw new MeasurementNotCreatedException("Sensor with this name does not exist!");
-        }
-        Measurement measurement = modelMapper.map(measurementDTO, Measurement.class);
-        measurement.setSensor(sensor);
-
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMsg = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMsg.append(error.getField()).append(" - ")
-                        .append(error.getDefaultMessage()).append(";");
-            }
-            throw new MeasurementNotCreatedException(errorMsg.toString());
-        }
-
-        measurementsService.create(measurement);
+    @PostMapping("/new")
+    public ResponseEntity<HttpStatus> create(@RequestParam @Min(value = -100) @Max(value = 100) Double value,
+                                             @RequestParam Boolean isRainy,
+                                             @RequestParam @Size(min = 3, max = 30) String sensorName) {
+        measurementsService.create(value, isRainy, sensorName);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -65,18 +45,18 @@ public class MeasurementsController {
 
     @ExceptionHandler
     private ResponseEntity<ErrorResponse> handleException(MeasurementNotFoundException e) {
-        ErrorResponse response = new ErrorResponse(
+        var response = new ErrorResponse(
                 "Measurement with this id was not found!",
-                System.currentTimeMillis()
+                Instant.now()
         );
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
-    private ResponseEntity<ErrorResponse> handleException(MeasurementNotCreatedException e) {
-        ErrorResponse response = new ErrorResponse(
+    private ResponseEntity<ErrorResponse> handleException(SensorException e) {
+        var response = new ErrorResponse(
                 e.getMessage(),
-                System.currentTimeMillis()
+                Instant.now()
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

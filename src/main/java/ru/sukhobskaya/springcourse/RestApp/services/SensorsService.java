@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sukhobskaya.springcourse.RestApp.model.Sensor;
 import ru.sukhobskaya.springcourse.RestApp.repositories.SensorsRepository;
+import ru.sukhobskaya.springcourse.RestApp.util.SensorValidator;
 
 @Service
 @Transactional(readOnly = true)
@@ -14,13 +15,18 @@ import ru.sukhobskaya.springcourse.RestApp.repositories.SensorsRepository;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SensorsService {
     SensorsRepository sensorsRepository;
+    SensorValidator sensorValidator;
 
     public Sensor findByName(String name) {
         return sensorsRepository.findByName(name).orElse(null);
     }
 
     @Transactional
-    public void save(Sensor sensor) {
-        sensorsRepository.saveAndFlush(sensor);
+    public void create(String sensorName) {
+        var sensor = findByName(sensorName);
+        sensorValidator.validateSensorDuplicate(sensorName, sensor);
+        var newSensor = new Sensor();
+        newSensor.setName(sensorName);
+        sensorsRepository.saveAndFlush(newSensor);
     }
 }
