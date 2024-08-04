@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.sukhobskaya.sensor.dto.MeasurementDto;
 import ru.sukhobskaya.sensor.model.Measurement;
 import ru.sukhobskaya.sensor.repositories.MeasurementRepository;
@@ -15,7 +14,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MeasurementService {
@@ -31,7 +29,6 @@ public class MeasurementService {
                 .toList();
     }
 
-    @Transactional
     public void create(Double temperature, Boolean isRainy, String sensorName) {
         var sensor = sensorService.findByName(sensorName);
         sensorValidator.validateSensorExist(sensorName, sensor);

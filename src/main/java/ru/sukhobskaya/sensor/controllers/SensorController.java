@@ -15,10 +15,11 @@ import ru.sukhobskaya.sensor.util.SensorExceptionHandler;
 
 import java.util.List;
 
-@Tag(name = "Sensor API")
+
 @RestController
 @RequestMapping("/sensors")
 @AllArgsConstructor
+@Tag(name = "Sensor API")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SensorController implements SensorExceptionHandler {
     SensorService sensorService;

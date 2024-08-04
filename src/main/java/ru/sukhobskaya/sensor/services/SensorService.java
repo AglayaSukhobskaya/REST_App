@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.sukhobskaya.sensor.model.Sensor;
 import ru.sukhobskaya.sensor.repositories.SensorRepository;
 import ru.sukhobskaya.sensor.util.SensorValidator;
@@ -12,7 +11,6 @@ import ru.sukhobskaya.sensor.util.SensorValidator;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SensorService {
@@ -27,7 +25,6 @@ public class SensorService {
         return sensorRepository.findByName(name).orElse(null);
     }
 
-    @Transactional
     public void create(String name) {
         var sensor = findByName(name);
         sensorValidator.validateSensorDuplicate(name, sensor);
@@ -36,6 +33,4 @@ public class SensorService {
                 .build();
         sensorRepository.saveAndFlush(newSensor);
     }
-
-
 }

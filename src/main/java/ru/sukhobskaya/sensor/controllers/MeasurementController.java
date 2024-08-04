@@ -18,33 +18,37 @@ import ru.sukhobskaya.sensor.util.SensorExceptionHandler;
 
 import java.util.List;
 
-@Tag(name = "Measurement API")
+
 @RestController
 @RequestMapping("/measurements")
 @AllArgsConstructor
+@Tag(name = "Measurement API")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MeasurementController implements SensorExceptionHandler {
     MeasurementService measurementService;
 
-    @Operation(summary = "Get all measurements")
     @GetMapping("/all")
+    @Operation(summary = "Get all measurements")
     public List<MeasurementDto> getAll() {
         return measurementService.findAll();
     }
 
-    @Operation(summary = "Make new measurement")
     @PostMapping("/new")
+    @Operation(summary = "Make new measurement")
     public ResponseEntity<HttpStatus> create(@RequestParam @Min(value = -100) @Max(value = 100)
-                                             @Parameter(description = "Temperature") Double temperature,
-                                             @RequestParam @Parameter(description = "Rain indicator") Boolean isRainy,
+                                             @Parameter(description = "Temperature")
+                                             Double temperature,
+                                             @RequestParam @Parameter(description = "Rain indicator")
+                                             Boolean isRainy,
                                              @RequestParam @Size(min = 3, max = 30)
-                                             @Parameter(description = "Sensor name") String sensorName) {
+                                             @Parameter(description = "Sensor name")
+                                             String sensorName) {
         measurementService.create(temperature, isRainy, sensorName);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @Operation(summary = "Get the total number of rainy days")
     @GetMapping("/rainy-days")
+    @Operation(summary = "Get the total number of rainy days")
     public Integer countRainyDays() {
         return measurementService.countRainyDays();
     }
