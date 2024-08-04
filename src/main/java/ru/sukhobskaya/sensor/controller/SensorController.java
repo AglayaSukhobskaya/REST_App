@@ -1,4 +1,4 @@
-package ru.sukhobskaya.sensor.controllers;
+package ru.sukhobskaya.sensor.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.sukhobskaya.sensor.services.SensorService;
+import ru.sukhobskaya.sensor.service.SensorService;
 import ru.sukhobskaya.sensor.util.SensorExceptionHandler;
 
 import java.util.List;

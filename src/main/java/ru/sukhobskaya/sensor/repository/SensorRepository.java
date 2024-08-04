@@ -1,4 +1,4 @@
-package ru.sukhobskaya.sensor.repositories;
+package ru.sukhobskaya.sensor.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

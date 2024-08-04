@@ -1,4 +1,4 @@
-package ru.sukhobskaya.sensor.services;
+package ru.sukhobskaya.sensor.service;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import ru.sukhobskaya.sensor.dto.MeasurementDto;
 import ru.sukhobskaya.sensor.model.Measurement;
-import ru.sukhobskaya.sensor.repositories.MeasurementRepository;
+import ru.sukhobskaya.sensor.repository.MeasurementRepository;
 import ru.sukhobskaya.sensor.util.SensorValidator;
 
 import java.time.LocalDateTime;
